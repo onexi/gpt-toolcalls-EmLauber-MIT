@@ -4,6 +4,7 @@ import { OpenAI} from 'openai';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from "fs";
+import 'dotenv/config';
 
 // Initialize Express server
 const app = express();
@@ -122,7 +123,7 @@ app.post('/api/openai-call', async (req, res) => {
                 model: "gpt-4o",
                 messages: messages,
             };
-            // Call the OpenAI API's chat completions endpoint to send the tool call result back to the model
+            // Call the OpenAI APIs chat completions endpoint to send the tool call result back to the model
             const final_response = await openai.chat.completions.create({
                 model: completion_payload.model,
                 messages: completion_payload.messages

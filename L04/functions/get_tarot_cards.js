@@ -41,5 +41,5 @@ export const details = {
     };
   };
 
-  print("Tarot card returned");
+  console.log("Tarot card returned");
   
