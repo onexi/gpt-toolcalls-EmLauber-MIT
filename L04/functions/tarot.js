@@ -25,21 +25,27 @@ const execute = async (action) => {
     { card: "Judgement", meaning: "Reflection, reckoning, awakening." },
     { card: "The World", meaning: "Completion, accomplishment, travel." }
   ];
-try {
-  // Check if the action is "draw"
-  if (action === 'draw') {
-    // Randomly select a tarot card
-    const randomCard = tarotDeck[Math.floor(Math.random() * tarotDeck.length)];
-    // Return the selected card and its meaning
+
+  try {
+    // Log the action to verify if it's being passed correctly
+    console.log('Received action:', action);
+
+    // Normalize action to ensure it's either 'draw' or 'pull'
+    if (action === 'draw' || action === 'pull') {
+      // Randomly select a tarot card
+      const randomCard = tarotDeck[Math.floor(Math.random() * tarotDeck.length)];
+      // Return the selected card and its meaning
       return {
         card: randomCard.card,
-        meaning: randomCard.meaning
+        // meaning: randomCard.meaning
       };
-  }
-} catch (error) {
+    } else {
+      throw new Error('Invalid action provided');
+    }
+  } catch (error) {
     console.error('An error occurred while drawing the tarot card:', error);
-  return { error: 'An error occurred while drawing the tarot card.' };
-}
+    return { error: 'An error occurred while drawing the tarot card.' };
+  }
 };
 
 const details = {
@@ -51,7 +57,7 @@ const details = {
       "properties": {
         "action": {
           "type": "string",
-          "description": "action is draw or pull"
+          "description": "action is 'draw' or 'pull'"
         }
       },
       "required": ["action"]
