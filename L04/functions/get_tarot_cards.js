@@ -25,35 +25,39 @@ const execute = async (action) => {
     { card: "Judgement", meaning: "Reflection, reckoning, awakening." },
     { card: "The World", meaning: "Completion, accomplishment, travel." }
   ];
-
+try {
   // Check if the action is "draw"
   if (action === 'draw') {
     // Randomly select a tarot card
     const randomCard = tarotDeck[Math.floor(Math.random() * tarotDeck.length)];
     // Return the selected card and its meaning
-    return {
-      card: randomCard.card,
-      meaning: randomCard.meaning
-    };
-  } else {
-    return { error: 'Invalid action' };
+      return {
+        card: randomCard.card,
+        meaning: randomCard.meaning
+      };
   }
+} catch (error) {
+    console.error('An error occurred while drawing the tarot card:', error);
+  return { error: 'An error occurred while drawing the tarot card.' };
+}
 };
 
 const details = {
-  type: "function",
+  "type": "function",
   function: {
-    name: "get_tarot_card",
-    parameters: {
-      type: "object",
-      properties: {
-        action: {
-          type: "string",
-          description: "action is draw"
+    "name": "get_tarot_card",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "action is draw or pull"
         }
       },
-      required: ["action"]
+      "required": ["action"]
     }
   },
-  description: "Randomly selects a tarot card and provides its fortune."
+  "description": "Randomly selects a tarot card and provides its fortune."
 };
+
+export { execute, details };
