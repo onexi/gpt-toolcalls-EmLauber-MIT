@@ -26,26 +26,9 @@ const execute = async (action) => {
     { card: "The World", meaning: "Completion, accomplishment, travel." }
   ];
 
-  try {
-    // Log the action to verify if it's being passed correctly
-    console.log('Received action:', action);
-
-    // Normalize action to ensure it's either 'draw' or 'pull'
-    if (action === 'draw' || action === 'pull') {
-      // Randomly select a tarot card
-      const randomCard = tarotDeck[Math.floor(Math.random() * tarotDeck.length)];
-      // Return the selected card and its meaning
-      return {
-        card: randomCard.card,
-        // meaning: randomCard.meaning
-      };
-    } else {
-      throw new Error('Invalid action provided');
-    }
-  } catch (error) {
-    console.error('An error occurred while drawing the tarot card:', error);
-    return { error: 'An error occurred while drawing the tarot card.' };
-  }
+  // pull a tarot card 
+  const fortune = tarotDeck[Math.floor(Math.random() * tarotDeck.length)];
+  return `You pulled a ${fortune.card}: ${fortune.meaning}`;
 };
 
 const details = {
