@@ -86,7 +86,7 @@ app.post('/api/openai-call', async (req, res) => {
     const availableFunctions = Object.values(functions).map(fn => fn.details);
     console.log(`availableFunctions: ${JSON.stringify(availableFunctions)}`);
     let messages = [
-        { role: 'system', content: 'You are a helpful assistant.' },
+        { role: 'system', content: 'You are a helpful assistant. The user may ask for a tarot card reading with the phrase "tell me my fortune" or ask to "draw" or "pull" a Tarot card. If this happens, you should call the tarot card function.' },
         { role: 'user', content: user_message }
     ];
     try {
